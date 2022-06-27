@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES6"
+    "rootDir": "src",
+    "target": "ES6",
+    "strictNullChecks": true,
+    "outDir": "dist",
+    "moduleResolution": "Node"
   },
   "include": [
     "*.config.js",

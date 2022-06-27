@@ -30,7 +30,8 @@
   "scripts": {
     "test": "jest",
     "prepare": "husky install",
-    "cm": "cz"
+    "cm": "cz",
+    "build": "tsc -p tsconfig.build.json"
   },
   "lint-staged": {
     "*.{js,ts}": [
