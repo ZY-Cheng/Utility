@@ -70,3 +70,32 @@ export function debounce<T extends UnknownFn>(fn: T, delay: number, options?: De
 export function throttle<T extends UnknownFn>(fn: T, delay: number, options?: Omit<DebounceOption, 'maxWait'>) {
   return debounce(fn, delay, { ...options, maxWait: delay });
 }
+
+export function countDown(
+  cb: (info: { rest: number; readonly isEnd: boolean }) => void,
+  remaining: number,
+  period = 300
+) {
+  let now = Date.now();
+  let timer: number | undefined;
+  const info = {
+    rest: remaining,
+    get isEnd() {
+      return info.rest <= 0;
+    },
+  };
+
+  cb(info);
+  if (info.isEnd && timer) {
+    clearTimeout(timer);
+    return;
+  }
+
+  timer = (setTimeout(() => {
+    const newNow = Date.now();
+    const duration = newNow - now;
+    now = newNow;
+    info.rest -= duration;
+    countDown(cb, info.rest, period);
+  }, period) as unknown) as number;
+}
