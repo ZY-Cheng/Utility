@@ -7,7 +7,7 @@
     "moduleResolution": "Node"
   },
   "include": [
-    "*.config.js",
+    "types/**/*.d.ts",
     "src/**/*.ts",
     "src/**/*.js",
     "**/__test__/**/*.js",
