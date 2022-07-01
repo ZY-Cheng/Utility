@@ -102,3 +102,14 @@ export function countDown(
     countDown(cb, info.rest, period);
   }, period) as unknown) as number;
 }
+
+export function curry(fn: UnknownFn) {
+  return function curried(...args: unknown[]) {
+    if (args.length >= fn.length) {
+      return fn(...args);
+    }
+    return function (...args1: unknown[]) {
+      return curried(...[...args, ...args1]);
+    };
+  };
+}
