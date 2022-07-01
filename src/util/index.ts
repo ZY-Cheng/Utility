@@ -12,6 +12,7 @@ export function debounce<T extends UnknownFn>(fn: T, delay: number, options?: De
   let timer: number | undefined;
   let result: ReturnType<T>;
   let preInvokeTimestamp: number;
+  let ctx: any;
 
   function shouldInvoke(now: number) {
     if (maxWait) {
@@ -23,7 +24,7 @@ export function debounce<T extends UnknownFn>(fn: T, delay: number, options?: De
 
   function invokeFn(now: number, ...args: Parameters<T>) {
     preInvokeTimestamp = now;
-    result = fn.apply(this, args) as ReturnType<T>;
+    result = fn.apply(ctx, args) as ReturnType<T>;
   }
 
   function leadInvoke(now: number, ...args: Parameters<T>) {
@@ -39,6 +40,8 @@ export function debounce<T extends UnknownFn>(fn: T, delay: number, options?: De
   }
 
   function debounced(...args: Parameters<T>) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    ctx = this;
     const now = Date.now();
     if (timer) {
       clearTimeout(timer);
