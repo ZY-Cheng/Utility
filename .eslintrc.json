@@ -12,7 +12,6 @@
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:jest-formatting/recommended",
     "plugin:jest/recommended",
-    "plugin:prettier/recommended",
     "prettier"
   ],
   "env": {
@@ -22,5 +21,8 @@
   },
   "parserOptions": {
     "project": "./tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/member-delimiter-style": "error"
   }
 }
