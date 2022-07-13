@@ -23,6 +23,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "@typescript-eslint/member-delimiter-style": "error"
+    "@typescript-eslint/member-delimiter-style": "error",
+    "import/prefer-default-export": 0
   }
 }
